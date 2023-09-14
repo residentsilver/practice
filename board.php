@@ -3,14 +3,19 @@
 
 <!-- 追加内容 -->
 
+
+
+<div class="insert">
 <form action="board-result.php" method="post">
     <input type="hidden" name="id" value="id">
-    <input type="hidden" name="test" value="insert">
-    名前<input type="text" name="name" value="匿名">
-    内容<input type="text" name="contents">
-    <input type="submit" value="投稿する">
+    <input type="hidden" name="insert" value="insert">
+    名前<br><input type="text" name="name" placeholder="匿名" class="name" ><br>
+    内容<input type="text" name="contents" class="contents">
+    <input type="submit" value="投稿する"><br><br>
+    投稿内容
+    
 </form>
-
+</div>
 
 <?php
 $pdo = new PDO(
@@ -19,16 +24,14 @@ $pdo = new PDO(
     'mariadb'
 );
 
-echo '投稿内容';
-echo '<br>';
-echo '<br>';
-
 // 閲覧のための記述
 
 foreach ($pdo->query('select * from board') as $row) {
     echo '<div class="all">';
+    echo '<div class="introduce">';
     echo $row['id'],'.';
-    echo $row['name'];
+    echo $row['name'] ,' ',$row['time'];
+    echo ' </div>';
     echo '<div class="content">';
     echo $row['contents'];
     echo ' </div>';
@@ -41,6 +44,8 @@ foreach ($pdo->query('select * from board') as $row) {
     echo ' </div>';
     echo '<br>';
     echo ' </div>';
+
+    
 }; 
 
 

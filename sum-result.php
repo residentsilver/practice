@@ -8,9 +8,7 @@ $pdo = new PDO(
     'mariadb'
 );
 
-$pdo->query('select sum(price) as 合計額 from product') ;
-
-
+$pdo->query('select sum(price) as total_price from product' );
 
 ?>
 <?php require '../footer.php'; ?>

@@ -5,13 +5,17 @@
     
 </style>
 
+
+<div class="insert">
 <form action="board-result.php" method="post">
-    <input type="hidden" name="id">
-    <input type="hidden" name="test" value="insert">
-    名前<input type="text" name="name" value="匿名">
-    内容<input type="text" name="contents">
-    <input type="submit" value="投稿する">
+    <input type="hidden" name="id" value="id">
+    <input type="hidden" name="insert" value="insert">
+    名前<br><input type="text" name="name" placeholder="匿名" class="name" ><br>
+    内容<input type="text" name="contents" class="contents">
+    <input type="submit" value="投稿する"><br><br>
+    投稿内容
 </form>
+</div>
 
 
 <?php
@@ -21,18 +25,19 @@ $pdo = new PDO(
     'mariadb'
 );
 
-if (isset($_REQUEST['test'])) {
-    if ($_REQUEST['test'] == 'insert') {
-        $sql = $pdo->prepare('insert into board values(null,?,?,0)');
+if (isset($_REQUEST['insert'])) {
+    if ($_REQUEST['insert'] == 'insert' && $_REQUEST['name'] =='') {
+        $sql = $pdo->prepare('insert into board values(null,DEFAULT,?,0,now())');
+        $sql->execute([ $_REQUEST['contents']]);
+        header("location:http://localhost/~itsys/practice/board.php");
+        exit();
+    }else if($_REQUEST['insert'] == 'insert') {
+        $sql = $pdo->prepare('insert into board values(null,?,?,0,now())');
         $sql->execute([$_REQUEST['name'], $_REQUEST['contents']]);
-    }
+        header("location:http://localhost/~itsys/practice/board.php");
+    exit();
 }
-
-echo '投稿内容';
-echo '<br>';
-echo '<br>';
-
-
+}
 
 if (isset($_REQUEST['good'])) {
     $sql = $pdo->prepare(
@@ -40,6 +45,8 @@ if (isset($_REQUEST['good'])) {
     $sql->execute(
         [$_REQUEST['id']]
     );
+    header("location:http://localhost/~itsys/practice/board.php");
+    exit();
 }
 
 // 閲覧のための記述
@@ -47,7 +54,7 @@ if (isset($_REQUEST['good'])) {
 foreach ($pdo->query('select * from board') as $row) {
     echo '<div class="all">';
     echo $row['id'],'.';
-    echo $row['name'];
+    echo $row['name'] ,' ',$row['time'];
     echo '<div class="content">';
     echo $row['contents'];
     echo ' </div>';
@@ -60,6 +67,7 @@ foreach ($pdo->query('select * from board') as $row) {
     echo ' </div>';
     echo '<br>';
     echo ' </div>';
+
 }; 
 
 

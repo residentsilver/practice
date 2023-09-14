@@ -36,12 +36,43 @@ ini_set('display_errors', "On");
 }
 
 .content{
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	text-align: left;
 }
 
 .good{
 	text-align: right;
+}
+
+.introduce{
+	font-size: .5rem;
+}
+
+.contents{
+	width: 100%;
+	line-height: 15rem;
+	text-align: left;
+	border-radius: 2rem;
+
+}
+
+.insert{
+	margin-left: auto;
+	margin-right: auto;
+	width: 800px;
+
+}
+
+.name {
+	width: 75%;
+	border-radius: 2rem;
+}
+
+input[type="text"]:focus {
+ outline: none;
+ border: 1px solid #ee82ee;
+ vertical-align: top;
+ border-radius: 2rem;
 }
 
     </style>
