@@ -1,16 +1,12 @@
 <?php require('../header.php'); ?>
-
-<form action="signin-result.php" method="post">
+<?php require 'menu.php'; ?>
+<form action="board-signin-result.php" method="post">
     
-<label for="id">id
+<label for="id">ログインID
 <input type="text" name="id"></label>
 <br>
 名前
 <input type="text" name="name" >
-<br>
-年齢
-<input type="text" name="age">
-
 <br>
 <label for="pass">パスワード
 <input type="text" name="pass" ></label>

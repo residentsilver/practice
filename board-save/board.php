@@ -1,9 +1,9 @@
-<?php require('header.php'); ?>
+<?php require('header.php');
+ ?>
 
-<style>
 
-    
-</style>
+<!-- 追加内容 -->
+
 
 
 <div class="insert">
@@ -14,9 +14,9 @@
     内容<input type="text" name="contents" class="contents">
     <input type="submit" value="投稿する"><br><br>
     投稿内容
+    
 </form>
 </div>
-
 
 <?php
 $pdo = new PDO(
@@ -25,36 +25,14 @@ $pdo = new PDO(
     'mariadb'
 );
 
-if (isset($_REQUEST['insert'])) {
-    if ($_REQUEST['insert'] == 'insert' && $_REQUEST['name'] =='') {
-        $sql = $pdo->prepare('insert into board values(null,DEFAULT,?,0,now())');
-        $sql->execute([ $_REQUEST['contents']]);
-        header("location:http://localhost/~itsys/practice/board.php");
-        exit();
-    }else if($_REQUEST['insert'] == 'insert') {
-        $sql = $pdo->prepare('insert into board values(null,?,?,0,now())');
-        $sql->execute([$_REQUEST['name'], $_REQUEST['contents']]);
-        header("location:http://localhost/~itsys/practice/board.php");
-    exit();
-}
-}
-
-if (isset($_REQUEST['good'])) {
-    $sql = $pdo->prepare(
-        'UPDATE board SET good_count = good_count + 1 where id = ?');
-    $sql->execute(
-        [$_REQUEST['id']]
-    );
-    header("location:http://localhost/~itsys/practice/board.php");
-    exit();
-}
-
 // 閲覧のための記述
 
 foreach ($pdo->query('select * from board') as $row) {
     echo '<div class="all">';
+    echo '<div class="introduce">';
     echo $row['id'],'.';
     echo $row['name'] ,' ',$row['time'];
+    echo ' </div>';
     echo '<div class="content">';
     echo $row['contents'];
     echo ' </div>';
@@ -68,12 +46,11 @@ foreach ($pdo->query('select * from board') as $row) {
     echo '<br>';
     echo ' </div>';
 
+    
 }; 
 
 
+
 ?>
-
-
-</form>
-
 <?php require('../footer.php'); ?>
+

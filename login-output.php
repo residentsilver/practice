@@ -1,4 +1,5 @@
 <?php require('../header.php'); ?>
+<?php require 'menu.php'; ?>
 <?php
 echo 'ようこそ、', $_REQUEST['id'], 'さん';
 
