@@ -28,7 +28,7 @@ if (isset($_REQUEST['insert'])) {
     if ($_REQUEST['insert'] == 'insert' ) {
         
         $sql = $pdo->prepare('insert into boards2 values(null,?,?,0,now())');
-        $sql->execute([$_SESSION['user']['name'],$_REQUEST['contents']]);
+        $sql->execute([$_SESSION['user']['login'],$_REQUEST['contents']]);
         header("location:http://localhost/~itsys/practice/board-login/board.php");
         exit();
     }

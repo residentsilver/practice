@@ -6,7 +6,7 @@ $pdo=new PDO('mysql:host=localhost;dbname=practice;charset=utf8',
 
 
     $sql=$pdo->prepare('insert into user values(?, ?, ?)');
-    if ($sql->execute([$_REQUEST['name'], $_REQUEST['pass'],$_REQUEST['id']])) {
+    if ($sql->execute([$_REQUEST['id'], $_REQUEST['name'],$_REQUEST['pass']])) {
         echo '追加に成功しました。';
     } else {
         echo '追加に失敗しました。';

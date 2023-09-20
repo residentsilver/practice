@@ -44,7 +44,7 @@ echo '<form action="board-result.php" method="post">';
 echo '    <input type="hidden" name="id" value="id">';
 echo '    <input type="hidden" name="insert" value="insert">';
 // echo '    <input type="hidden" name="login" value="$login">';
-echo '名前<br><input type="text" name="name" placeholder="匿名" class="name" ><br>';
+// echo '名前<br><input type="text" name="name" placeholder="匿名" class="name" ><br>';
 echo '内容<input type="text" name="contents" class="contents">';
 echo '<input type="submit" value="投稿する"><br><br>';
 echo ' 投稿内容';
@@ -52,12 +52,13 @@ echo ' </form>';
 echo ' </div>';
 
 // 閲覧のための記述
-if (isset($_SESSION['user'])) {
-    foreach ($pdo->query('select * from boards2') as $row) {
+if (isset($_SESSION['user'] ) ) {
+    foreach ($pdo->query("select * from boards2 join user on boards2.user_login = user.login" ) as $row) {
+        if($row['login'] === $login){
         echo '<div class="all">';
         echo '<div class="introduce">';
         echo $row['id'], '.';
-        echo $row['user_login'], ' ', $row['time'];
+        echo $row['name'], ' ', $row['time'];
         echo ' </div>';
         echo '<div class="content">';
         echo $row['contents'];
@@ -72,6 +73,7 @@ if (isset($_SESSION['user'])) {
         echo '<br>';
         echo ' </div>';
     }
+}
 };
 
 
