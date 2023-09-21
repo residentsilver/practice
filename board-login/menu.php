@@ -3,4 +3,6 @@
 <a href="board-signin-input.php">会員登録</a>
 <a href="board-update.php">会員情報の更新</a>
 <a href="board.php">投稿一覧</a>
+<a href="board-search.php">検索</a>
+
 <hr>

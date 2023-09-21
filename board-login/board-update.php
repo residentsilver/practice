@@ -8,6 +8,15 @@ $name ='';
 $login = '';
 $password = '';
 
+if(empty($_SESSION['token'])){
+    //このセッション専用のトークンを作る
+    $token =bin2hex(openssl_random_pseudo_bytes(24));
+    //セッション変数としてトークンを登録
+    $_SESSION['token'] =$token;
+}else {
+    $token = $_SESSION['token'];
+}
+
 if (isset($_SESSION['user'])) {
         $name = $_SESSION['user']['name'];
         $login = $_SESSION['user']['login'];
@@ -24,9 +33,13 @@ if (isset($_SESSION['user'])) {
     echo '</td></tr>';
     echo '</table>';
     echo '<input type="submit" value="確定">';
-
+    ?>
+    <!-- トークンを送る -->
+ <input type="hidden" name="token" value="<?php echo htmlspecialchars($token , ENT_COMPAT, 'utf-8'); ?>">
+ <?php 
+    echo '</form>';
 }else{
-    echo 'ログインしてください。';
+    echo 'ログインしてください';
 }
 ?>
 <?php require '../footer.php'; ?>

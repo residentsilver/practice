@@ -1,5 +1,12 @@
 <?php require '../header.php'; ?>
 <?php require 'menu.php'; ?>
-<p>ログアウトしますか？</p>
-<a href="board-logout-result.php">ログアウト</a>
+<?php session_start(); ?>   
+<?php 
+if(isset($_SESSION['user'])){
+echo '<p>ログアウトしますか？</p>';
+echo '<a href="board-logout-result.php">ログアウト</a>';
+}else {
+    echo 'すでにログアウトしています。';
+}
+ ?>
 <?php require '../footer.php'; ?>

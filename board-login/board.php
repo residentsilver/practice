@@ -34,11 +34,9 @@ if (isset($_SESSION['user'])) {
     // print_r($name);
     // print_r($login);
     // print_r($password);
-} else {
-    echo 'ログインしてください';
 }
-
 // <!-- 追加内容 -->
+if (isset($_SESSION['user'])) {
 echo '<div class="insert">';
 echo '<form action="board-result.php" method="post">';
 echo '    <input type="hidden" name="id" value="id">';
@@ -50,6 +48,9 @@ echo '<input type="submit" value="投稿する"><br><br>';
 echo ' 投稿内容';
 echo ' </form>';
 echo ' </div>';
+}else{
+    echo 'ログインしてください';
+    }
 
 // 閲覧のための記述
 if (isset($_SESSION['user'] ) ) {
